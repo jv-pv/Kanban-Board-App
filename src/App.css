@@ -1,4 +1,4 @@
-/* Page content */
+/* Page Content Styles */
 
 section.page-content {
     display: flex;
@@ -6,7 +6,12 @@ section.page-content {
     min-height: 100dvh;
 }
 
+/* Main Content Styles */
 
+section.page-content div.main-content-container {
+    display: flex;
+    flex: 1 0 auto;
+}
 
 /* Navbar Styles */
 
@@ -27,15 +32,15 @@ nav h1 {
     color: whitesmoke;
 }
 
-/* Sidebar styling */
+/* Sidebar Styles */
 
-div.sidebar-container {
-    width: 150px;
+aside.sidebar-container {
     background-color: rgb(226, 226, 226);
-    flex: 1 0 auto;
+    flex: 1 0 125px;
+    max-width: 200px;
 }
 
-div.sidebar-container ul {
+aside.sidebar-container ul {
     margin: 0;
     padding: 0;
 }
@@ -52,8 +57,16 @@ ul li a {
     text-decoration: none;
 }
 
+/* Board Styles */
 
-/* Footer styling */
+section.board-container {
+    background-color: antiquewhite;
+    width: 1000px;
+    flex: 1 0 auto;
+}
+
+
+/* Footer Styles */
 
 footer.footer-container {
     display: flex;
