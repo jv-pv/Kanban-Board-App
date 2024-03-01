@@ -1,11 +1,17 @@
-function Sidebar() {
+import { NavLink } from "react-router-dom";
+
+const Sidebar = () => {
+
+
+
   return (
-    <aside className="sidebar-container">
-      <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">About</a></li>
-      </ul>
-    </aside>
+  <aside className="sidebar-container">
+    <ul>
+      <li><NavLink to="/" >Home</NavLink></li>
+      <li><NavLink to="/board" >Board</NavLink></li>
+      <li><NavLink to="/about" >About</NavLink></li>
+    </ul>
+  </aside>
   )
 }
 

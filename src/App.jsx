@@ -1,21 +1,28 @@
 import './App.css'
-import Navbar from "./components/Navbar.jsx"
-import Sidebar from "./components/Sidebar.jsx"
-import Board from "./components/Board.jsx"
+import Header from "./components/Header.jsx"
 import Footer from "./components/Footer.jsx"
+import DashBoardPage from './pages/DashBoardPage.jsx'
+import HomePage from './pages/HomePage.jsx'
+import AboutPage from './pages/AboutPage.jsx'
+import ErrorPage from './pages/ErrorPage.jsx'
 
-function App() {
+import { Routes, Route } from "react-router-dom";
+
+const App = () => {
   return (
-    <>
       <section className="page-content">
-        <Navbar/>
-        <div className="main-content-container">
-          <Sidebar/>
-          <Board/>
-        </div>
+        <Header/>
+        <Routes>
+
+          <Route path="/" element={<HomePage/>} />
+          <Route path="/board" element={<DashBoardPage/>} />
+          <Route path="/about" element={<AboutPage/>} />
+
+          <Route path='*' element={<ErrorPage/>}/>
+
+        </Routes>
         <Footer/>
       </section>
-    </>
   )
 }
 

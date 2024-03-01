@@ -1,13 +1,13 @@
 import List from "./List.jsx"
 import kanbanData from "../data.json"
 
-function Board() {
-    console.log(kanbanData)
+const Board = () => {
+
   return (
     <section className="board-container">
-        <List type="To Do"/>
-        <List type="In Progress"/>
-        <List type="Done"/>
+        <List type="To Do"  kanbanData={kanbanData}/>
+        <List type="In Progress"  kanbanData={kanbanData}/>
+        <List type="Done"  kanbanData={kanbanData}/>
     </section>
   )
 }

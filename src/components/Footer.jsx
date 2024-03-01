@@ -1,6 +1,6 @@
 import { Github } from "iconoir-react";
 
-function Footer() {
+const Footer = () => {
   return (
     <footer className="footer-container">
       <Github/>
