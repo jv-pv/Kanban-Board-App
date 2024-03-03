@@ -36,7 +36,6 @@ nav h1 {
 /* Sidebar Styles */
 
 aside.sidebar-container {
-    background-color: rgb(226, 226, 226);
     flex: 1;
     min-width: 125px;
     max-width: 175px;
@@ -60,6 +59,53 @@ ul li a {
     text-decoration: none;
 }
 
+
+/* Home Page Styles */
+
+div.home-content-container {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    justify-content: flex-start;
+    flex: 1;
+}
+
+div.current-boards-wrapper {
+    width: 100%;
+    min-width: 350px;
+    max-height: fit-content;
+    background-color: azure;
+    border-radius: 3px;
+    border: 1px solid black;
+    padding: 1rem;
+}
+
+div.boards-card {
+    display: flex;
+    align-items: center;
+    width: 50%;
+    height: fit-content;
+    margin: 1rem 0 0;
+    padding: 1rem;
+    outline: 1px solid black;
+}
+
+.board-card-link {
+    margin-left: auto;
+    text-decoration: none;
+    height: fit-content;
+    padding: 0.3rem 0.5rem;
+    color: whitesmoke;
+    font-weight: bold;
+    background-color: #2c47b5;
+}
+
+.board-card-link:hover {
+    box-shadow: 0 0 10px #2c47b5;
+    transition: box-shadow 250ms;
+}
+
 /* Board Styles */
 
 section.board-container {
@@ -79,6 +125,8 @@ section.board-container {
 /* List Styles */
 
 div.list-columns {
+    display: flex;
+    flex-direction: column;
     width: 25%;
     min-width: 350px;
     height: 100%;
@@ -100,6 +148,17 @@ div.list-columns .title-type-box h1 {
     padding: 0.5rem;
 }
 
+div.list-columns .new-task-container {
+    margin-top: auto;
+    padding: 1rem;
+    align-self: flex-end;
+}
+
+div.new-task-container button {
+    border: 1px solid black;
+    background-color: rgb(255, 225, 0);
+}
+
 /* Card Styles */
 
 div.card-container {
@@ -118,8 +177,9 @@ div.card-wrapper {
 
 div.button-container {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
+    margin-top: 1rem;
 }
 
 div.button-container button{
@@ -139,8 +199,48 @@ footer.footer-container {
     color: white;
 }
 
+/* Modal Forms */
+
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+}
+
+.modal-content {
+    width: 20%;
+    /* min-height: 200px; */
+    border: 1px solid black;
+    background-color: white;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.edit-task {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
 
 /* General */
+
 span.bold {
     font-weight: bold;
+}
+
+.selected {
+    font-weight: bold;
+    text-decoration: underline;
 }
