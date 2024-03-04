@@ -1,25 +1,76 @@
-import Card from "./Card.jsx"
-
 import { useState } from "react"
+import {v4 as uuidv4} from "uuid"
+
+import Card from "./Card.jsx"
+import AddTaskForm from "./AddTaskForm.jsx"
+import AddTask from "./AddTask.jsx"
+import Toast from "./Toast.jsx"
 
 const List = ({type, cards, setCards}) => {
 
-  // const [newTask, setNewTask] = useState({
-  //   id: "",
-  //   title: "",
-  //   "description": "Investigate and fix the login problem reported by users.",
-  //   "assignee": "Mark Johnson",
-  //   "status": "In Progress",
-  //   "priority": "High",
-  //   "createdDate": "2023-09-17",
-  //   "dueDate": "2023-09-25"
-  // })
 
-  // const handleTextChange = (e) => {
-  //   setNewTask((prev) => ({...prev, ["id"]: randomIdGenerator()}))
-  //   setNewTask((prev) => ({...prev, [e.target.name]: e.target.value})) 
-  // }
+  const [showModal, setShowModal] = useState(false)
+  const [showToast, setShowToast] = useState(false)
+  const [toastMessage, setToastMessage] = useState("")
+  const [newTask, setNewTask] = useState({
+    id: "",
+    title: "",
+    description: "",
+    assignee: "",
+    status: type,
+    priority: "",
+    createdDate: "",
+    dueDate: ""
+  })
 
+  const showToastMessage = (message) => {
+    setShowToast(true)
+    setToastMessage(message)
+    setTimeout(() => setShowToast(false), 1000)
+  }
+
+  const handleNewTaskSubmit = () => {
+
+    const isFormValid = newTask.title.trim() !== "" &&
+    newTask.description.trim() !== "" &&
+    newTask.assignee.trim() !== ""
+    
+
+    let taskWithId = {id: uuidv4(), ...newTask}
+
+    console.log(taskWithId)
+
+    if (isFormValid) {
+
+      addTask(taskWithId)
+  
+      setNewTask({    
+        id: "",
+        title: "",
+        description: "",
+        assignee: "",
+        status: type,
+        priority: "",
+        createdDate: "",
+        dueDate: ""
+      })
+  
+      setShowModal(false)
+      showToastMessage("Successfully add new task.")
+
+    } else {
+      showToastMessage("Please fill out all inputs")
+    }
+
+  }
+
+  
+  const addTask = (newTask) => {
+      let newTasks = [newTask, ...cards]
+      setCards(newTasks)
+    }
+    
+    
   const handleTaskChange = (id, updatedTask) => {
     let thisIndex;
     let thisCard = cards.find((card, i) => {
@@ -27,30 +78,25 @@ const List = ({type, cards, setCards}) => {
       return card.id === id;
     })
 
-    console.log("This is the task we're updating", thisCard, thisIndex)
+    // console.log("This is the task we're updating", thisCard, thisIndex)
 
     let newCards = [...cards];
     newCards[thisIndex] = updatedTask;
     setCards(newCards);
-
+    showToastMessage("Succesfully edited task.")
   };
-
-  // const addTask = (newTask) => {
-  //   let newTasks = [newTask, ...cards]
-  //   setCards(newTasks)
-  // }
-
   
-  let filteredByType = cards.filter(data => {
-    return data.status === type
-  })
-
   const handleDelete = (cardId) => {
     let filteredCards = cards.filter(card => {
       return card.id !== cardId
     })
     setCards(filteredCards)
+    showToastMessage("Succesfully deleted task.")
   }
+
+  let filteredByType = cards.filter(data => {
+    return data.status === type
+  })
 
   let cardComponents = filteredByType.map(data => {
     return (
@@ -73,8 +119,29 @@ const List = ({type, cards, setCards}) => {
             {cardComponents}
         </div>
         <div className="new-task-container">
-          <button>Add New Task</button>
+          <button onClick={() => setShowModal(true)}>Add Task</button>
         </div>
+
+      <AddTask
+      buttonAction={"Add Task"}
+      showModal={showModal}
+      closeModal={() => setShowModal(false)}
+      handleSubmit={() => handleNewTaskSubmit()}
+      >
+
+      <AddTaskForm
+      newTask={newTask}
+      setNewTask={setNewTask}
+      status={newTask.status}
+      />
+
+      </AddTask>
+
+      <Toast
+      showToast={showToast}
+      toastMessage={toastMessage}
+      />
+
     </div>
   )
 }
