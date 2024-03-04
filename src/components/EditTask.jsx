@@ -20,8 +20,10 @@ const EditTask = ({ buttonAction, children, closeModal, handleSubmit, showModal 
                 }}
               >
                 {children}
-                <button onClick={closeModal}>Cancel</button>
-                <button onClick={handleSubmit}>{buttonAction}</button>
+                <div className="modal-buttons">
+                    <button onClick={closeModal}>Cancel</button>
+                    <button onClick={handleSubmit}>{buttonAction}</button>  
+                </div>
               </div>
             </div>
           ) 

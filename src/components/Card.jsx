@@ -1,23 +1,20 @@
 import { useState } from "react"
 import EditTask from "./EditTask"
+import EditTaskForm from "./EditTaskForm"
 
 const Card = (props) => {
 
   const [showModal, setShowModal] = useState(false)
   const [thisTask, setThisTask] = useState({...props})
   const [status, setStatus] = useState(props.status)
-
-  const handleTextChange = (e) => {
-    setThisTask((prev) => ({...prev, [e.target.name]: e.target.value})) 
-  }
+  const [priority, setPriority] = useState(props.priority)
 
   const handleSubmit = () => {
     props.handleTaskChange(props.id, thisTask)
     setShowModal(false)
   }
 
-  console.log("This is the task", thisTask)
-
+  // console.log("This is the task", thisTask)
 
   const styles = {
     color: props.priority === "High" ? "crimson" : props.priority === "Medium" ? "darkorange" : props.priority === "Low" ? "green" : "",
@@ -46,49 +43,19 @@ const Card = (props) => {
       <EditTask
       buttonAction={"Update Task"}
       showModal={showModal}
+      closeModal={() => setShowModal(false)}
       handleSubmit={() => handleSubmit()}
-      closeModal={() => {
-      setShowModal(false);
-        }}
-
       >
-        <div className="edit-task">
-            <label>Name
-              <input type="text" name="title" onChange={handleTextChange} value={thisTask.title} />
-            </label>
 
-            <label>Description
-              <input type="text" name="description" onChange={handleTextChange} value={thisTask.description}/>
-            </label>
-
-            <label>
-              <input type="text" name="assignee"/>
-            </label>
-
-            <label>Status</label>
-            <select name="status" onChange={handleTextChange}>
-              <option value={status}>Current status: {status}</option>
-              <option value="To Do">To Do</option>
-              <option value="In Progress">In Progress</option>
-              <option value="Done">Done</option>
-            </select>
-
-            <label>
-              <input type="text"/>
-            </label>
-
-            <label>
-              <input type="date" name="dueDate" onChange={handleTextChange} value={thisTask.dueDate}/>
-            </label>
-
-            <label>
-              <input type="text"/>
-            </label>
-
-        </div>
+        <EditTaskForm
+        thisTask={thisTask}
+        setThisTask={setThisTask}
+        status={status}
+        priority={priority}
+        />
 
       </EditTask>
-      
+
     </div>
   )
 }
