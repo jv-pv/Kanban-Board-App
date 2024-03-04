@@ -1,5 +1,4 @@
 import { useId } from "react"
-import {v4 as uuidv4} from "uuid"
 
 const AddTaskForm = ({ newTask, setNewTask, status }) => {
 
@@ -10,7 +9,6 @@ const AddTaskForm = ({ newTask, setNewTask, status }) => {
       setNewTask(prevTask => {
         return {
           ...prevTask,
-          id: uuidv4(),
           [name]: value
       }
     })
@@ -18,7 +16,7 @@ const AddTaskForm = ({ newTask, setNewTask, status }) => {
  
 
   return (
-
+    
   <div className="add-task">
 
     <label htmlFor={id + "-name"}>Name:</label>
@@ -53,7 +51,7 @@ const AddTaskForm = ({ newTask, setNewTask, status }) => {
     <input type="date" name="dueDate" id={id + "-due"} onChange={handleTextChange} value={newTask.dueDate} required/>
 
   </div>
-  
+
   )
 }
 

@@ -26,7 +26,7 @@ const List = ({type, cards, setCards}) => {
   const showToastMessage = (message) => {
     setShowToast(true)
     setToastMessage(message)
-    setTimeout(() => setShowToast(false), 1000)
+    setTimeout(() => setShowToast(false), 2900)
   }
 
   const handleNewTaskSubmit = () => {
@@ -59,7 +59,7 @@ const List = ({type, cards, setCards}) => {
       showToastMessage("Successfully add new task.")
 
     } else {
-      showToastMessage("Please fill out all inputs")
+      showToastMessage("Please fill out all form inputs.")
     }
 
   }

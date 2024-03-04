@@ -285,6 +285,7 @@ div.toast-container {
     color: whitesmoke;
     padding: 1rem 1.5rem;
     font-weight: bold;
+    animation: toastSlideIn 0.5s ease-out, toastSlideOut 0.5s ease-out 2.5s;
 }
 
 
@@ -297,4 +298,26 @@ span.bold {
 .selected {
     font-weight: bold;
     text-decoration: underline;
+}
+
+/* Animations */
+
+@keyframes toastSlideIn {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0%);
+        opacity: 1;
+    }
+}
+
+@keyframes toastSlideOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
 }
