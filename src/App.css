@@ -201,6 +201,7 @@ footer.footer-container {
 
 /* Modal Forms */
 
+
 div.modal-backdrop {
     position: fixed;
     top: 0;
@@ -223,10 +224,17 @@ div.modal-content {
     color: whitesmoke;
     padding: 1.5rem;
     display: flex;
+    justify-content: center
+}
+
+form {
+    display: flex;
     flex-direction: column;
-    flex-wrap: nowrap;
-    align-items: center;
-    gap: 1.5rem;
+    align-items: stretch;
+    gap: 1rem;
+    width: 100%;
+    max-width: 250px;
+    height: 100%;
 }
 
 div.edit-task, div.add-task {
@@ -257,13 +265,15 @@ div.modal-buttons {
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
-    width: 75%;
-    padding-bottom: 0.6rem;
+    width: 100%;
+    padding-bottom: 0.5rem;
 }
 
 div.modal-buttons button {
+    font-weight: bold;
     border: 1px solid black;
     background-color: rgb(255, 225, 0);
+    padding: 0.3rem 0.7rem;
 }
 
 /* Toast */

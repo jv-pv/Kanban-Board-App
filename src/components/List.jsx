@@ -9,6 +9,7 @@ import Toast from "./Toast.jsx"
 const List = ({type, cards, setCards}) => {
 
 
+
   const [showModal, setShowModal] = useState(false)
   const [showToast, setShowToast] = useState(false)
   const [toastMessage, setToastMessage] = useState("")
@@ -29,19 +30,16 @@ const List = ({type, cards, setCards}) => {
     setTimeout(() => setShowToast(false), 2900)
   }
 
-  const handleNewTaskSubmit = () => {
+  const handleNewTaskSubmit = (e) => {
+    e.preventDefault()
 
     const isFormValid = newTask.title.trim() !== "" &&
     newTask.description.trim() !== "" &&
     newTask.assignee.trim() !== ""
-    
 
-    let taskWithId = {id: uuidv4(), ...newTask}
-
-    console.log(taskWithId)
+    const taskWithId = {...newTask, id: uuidv4()}
 
     if (isFormValid) {
-
       addTask(taskWithId)
   
       setNewTask({    
@@ -66,36 +64,52 @@ const List = ({type, cards, setCards}) => {
 
   
   const addTask = (newTask) => {
-      let newTasks = [newTask, ...cards]
-      setCards(newTasks)
+      setCards(prevCards => [newTask, ...prevCards])
     }
     
-    
+  
+  // ! DOES NOT WORK BECAUSE THE ORDER OF THE ARRAY CAN CHANGE
+  // ! CAUSING THE INDEXES TO SHIFT IF CARD IS DELETED
+  // ! CAUSING BUGS LIKE DUPLICATION AFTER EDITING A CARD TWICE
+  // const handleTaskChange = (id, updatedTask) => {
+  //   let thisIndex;
+  //   let thisCard = cards.find((card, i) => {
+  //     thisIndex = i;
+  //     return card.id === id;
+  //   })
+
+  //   console.log("This is the task we're updating", thisCard, thisIndex)
+
+  //   let newCards = [...cards];
+  //   newCards[thisIndex] = updatedTask;
+  //   setCards(newCards);
+  //   setCards(prevCards => {
+  //     let newCards = [...prevCards]
+  //     console.log(updatedTask)
+  //     newCards[thisIndex] = updatedTask
+  //     return newCards
+  //   })
+  //   showToastMessage("Succesfully edited task.")
+  // };
+
+  // ** SOUND APPROACH TO EDITING
   const handleTaskChange = (id, updatedTask) => {
-    let thisIndex;
-    let thisCard = cards.find((card, i) => {
-      thisIndex = i;
-      return card.id === id;
+    setCards(prevCards => {
+      return prevCards.map(card => card.id === id ? updatedTask : card)
     })
-
-    // console.log("This is the task we're updating", thisCard, thisIndex)
-
-    let newCards = [...cards];
-    newCards[thisIndex] = updatedTask;
-    setCards(newCards);
-    showToastMessage("Succesfully edited task.")
-  };
+    showToastMessage("Task succesfully edited.")
+  }
   
   const handleDelete = (cardId) => {
-    let filteredCards = cards.filter(card => {
-      return card.id !== cardId
+
+    setCards(prevCards => {
+      return prevCards.filter(card => card.id !== cardId)
     })
-    setCards(filteredCards)
     showToastMessage("Succesfully deleted task.")
   }
 
   let filteredByType = cards.filter(data => {
-    return data.status === type
+    return data && data.status === type
   })
 
   let cardComponents = filteredByType.map(data => {
@@ -104,6 +118,7 @@ const List = ({type, cards, setCards}) => {
         key={data.id}
         onDelete={handleDelete}
         handleTaskChange={handleTaskChange}
+        showToastMessage={showToastMessage}
         {...data}
         />
     )
@@ -123,16 +138,16 @@ const List = ({type, cards, setCards}) => {
         </div>
 
       <AddTask
-      buttonAction={"Add Task"}
       showModal={showModal}
       closeModal={() => setShowModal(false)}
-      handleSubmit={() => handleNewTaskSubmit()}
       >
 
       <AddTaskForm
       newTask={newTask}
       setNewTask={setNewTask}
       status={newTask.status}
+      handleNewTaskSubmit={(e) => handleNewTaskSubmit(e)}
+      closeModal={() => setShowModal(false)}
       />
 
       </AddTask>

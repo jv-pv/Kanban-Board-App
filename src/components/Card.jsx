@@ -6,12 +6,20 @@ const Card = (props) => {
 
   const [showModal, setShowModal] = useState(false)
   const [thisTask, setThisTask] = useState({...props})
-  const [status, setStatus] = useState(props.status)
-  const [priority, setPriority] = useState(props.priority)
 
-  const handleSubmit = () => {
-    props.handleTaskChange(props.id, thisTask)
-    setShowModal(false)
+  const handleEditSubmit = (e) => {
+    e.preventDefault()
+
+    let formIsValid = thisTask.title.trim() !== "" &&
+    thisTask.description.trim() !== "" && 
+    thisTask.assignee.trim() !== ""
+
+    if (formIsValid) {
+      props.handleTaskChange(props.id, thisTask)
+      setShowModal(false)
+    } else {
+      props.showToastMessage("Please fill out all form inputs.")
+    }
   }
 
   // console.log("This is the task", thisTask)
@@ -41,17 +49,15 @@ const Card = (props) => {
       </div>
 
       <EditTask
-      buttonAction={"Update Task"}
       showModal={showModal}
       closeModal={() => setShowModal(false)}
-      handleSubmit={() => handleSubmit()}
       >
 
         <EditTaskForm
         thisTask={thisTask}
         setThisTask={setThisTask}
-        status={status}
-        priority={priority}
+        handleEditSubmit={(e) => handleEditSubmit(e)}
+        closeModal={() => setShowModal(false)}
         />
 
       </EditTask>
