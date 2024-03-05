@@ -68,9 +68,11 @@ const List = ({type, cards, setCards}) => {
     }
     
   
-  // ! DOES NOT WORK BECAUSE THE ORDER OF THE ARRAY CAN CHANGE
-  // ! CAUSING THE INDEXES TO SHIFT IF CARD IS DELETED
-  // ! CAUSING BUGS LIKE DUPLICATION AFTER EDITING A CARD TWICE
+  // ! DOES NOT WORK 100% BECAUSE THE ORDER OF THE ARRAY CAN CHANGE
+  // CAUSING THE INDEXES TO SHIFT IF CARD IS DELETED
+  // CAUSING BUGS LIKE DUPLICATION AFTER EDITING A CARD TWICE AFTER DELETION OF
+  // OTHER ITEMS vvv
+  
   // const handleTaskChange = (id, updatedTask) => {
   //   let thisIndex;
   //   let thisCard = cards.find((card, i) => {
@@ -92,7 +94,7 @@ const List = ({type, cards, setCards}) => {
   //   showToastMessage("Succesfully edited task.")
   // };
 
-  // ** SOUND APPROACH TO EDITING
+  // ** SOUND APPROACH TO EDITING USING .map() vvv
   const handleTaskChange = (id, updatedTask) => {
     setCards(prevCards => {
       return prevCards.map(card => card.id === id ? updatedTask : card)
