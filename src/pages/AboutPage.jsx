@@ -6,9 +6,9 @@ const AboutPage = () => {
     <div className="main-content-container">
       <Sidebar/>
       <div className="about-container">
-      <div class="card">
-            <img class="avatar" src="src/assets/mypic.jpg"/>
-            <div class="text" >
+      <div className="card">
+            <img className="avatar" src="src/assets/mypic.jpg"/>
+            <div className="text" >
                 <h3>John Pieri Varela</h3>
                 <p>Full-Stack Developer</p>
                 <p>Puerto Rico</p>
