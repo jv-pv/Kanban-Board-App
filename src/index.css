@@ -4,6 +4,11 @@
     box-sizing: border-box;
 }
 
+@font-face {
+    font-family: ABC Social;
+    src: url("src/assets/fonts/ABCSocialExtendedVariableEdu.ttf");
+}
+
 :root {
     --step--2: clamp(0.6944rem, 0.2719rem + 1.69vw, 0.8rem);
     --step--1: clamp(0.8331rem, 0.1656rem + 2.67vw, 1rem);
@@ -15,7 +20,7 @@
     --step-5: clamp(2.4881rem, -2.8194rem + 21.23vw, 3.815rem);
 
 
-    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    font-family: ABC Social, system-ui, Avenir, Helvetica, Arial, sans-serif;
     font-synthesis: none;
     /* color-scheme: light dark; */
     -webkit-font-smoothing: antialiased;
