@@ -139,7 +139,7 @@ const List = ({type, cards, setCards}) => {
     e.preventDefault()
     
    
-   const cardId = e.dataTransfer.getData("text/plain")
+  const cardId = e.dataTransfer.getData("text/plain")
    
     setCards((prev) => prev.map((card) => card.id === cardId ? {...card, status: targetStatus}: card) )
    
