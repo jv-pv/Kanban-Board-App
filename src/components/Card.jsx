@@ -28,10 +28,11 @@ const Card = (props) => {
     color: props.priority === "High" ? "crimson" : props.priority === "Medium" ? "darkorange" : props.priority === "Low" ? "green" : "",
     fontWeight: "bold"
   }
+  
 
 
   return (
-    <div className="card-wrapper">
+    <div  draggable  onDragStart={(e) => props.handleDragStart(e, props.id)} className="card-wrapper">
 
       <h1>{props.title}</h1>
       <p><span className="bold">Description: </span>{props.description}</p>

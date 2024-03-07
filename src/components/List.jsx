@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import {v4 as uuidv4} from "uuid"
 
 import Card from "./Card.jsx"
@@ -67,7 +67,9 @@ const List = ({type, cards, setCards}) => {
       setCards(prevCards => [newTask, ...prevCards])
     }
     
-  
+    
+
+ 
   // ! DOES NOT WORK 100% BECAUSE THE ORDER OF THE ARRAY CAN CHANGE
   // CAUSING THE INDEXES TO SHIFT IF CARD IS DELETED
   // CAUSING BUGS LIKE DUPLICATION AFTER EDITING A CARD TWICE AFTER DELETION OF
@@ -113,26 +115,51 @@ const List = ({type, cards, setCards}) => {
   let filteredByType = cards.filter(data => {
     return data && data.status === type
   })
+  const handleDragStart = (e, cardId) => {
+   
+    e.dataTransfer.setData("text/plain", cardId)
+  }
 
   let cardComponents = filteredByType.map(data => {
     return (
         <Card
         key={data.id}
         onDelete={handleDelete}
+        handleDragStart={handleDragStart}
         handleTaskChange={handleTaskChange}
         showToastMessage={showToastMessage}
+       
         {...data}
         />
     )
   })
 
 
+  const handleDrop = (e, targetStatus) => {
+    e.preventDefault()
+    
+   
+   const cardId = e.dataTransfer.getData("text/plain")
+   
+    setCards((prev) => prev.map((card) => card.id === cardId ? {...card, status: targetStatus}: card) )
+   
+  }
+    
+  const handleOnDragOver = (e) => {
+    e.preventDefault()
+  }
+
+  useEffect(() => {
+
+    console.log(cards)
+  }, [cards])
+
   return (
-    <div className="list-columns">
+    <div className="list-columns" onDrop={(e) => handleDrop(e, type)} onDragOver={(e)=> handleOnDragOver(e) }>
         <span className="title-type-box">
             <h1>{type}</h1>   
         </span>
-        <div className="card-container">
+        <div className="card-container" >
             {cardComponents}
         </div>
         <div className="new-task-container">
