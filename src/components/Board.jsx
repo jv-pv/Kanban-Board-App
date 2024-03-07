@@ -8,10 +8,6 @@ const Board = () => {
 
   const [cards, setCards] = useState(kanbanData)
 
-
-
-
-
   return (
     <section className="board-container">
 
