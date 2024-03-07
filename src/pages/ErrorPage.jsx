@@ -7,8 +7,10 @@ function ErrorPage() {
   return (
     <div className="main-content-container">
       <Sidebar/>
-      <h1>404</h1>
-      <img src={imgURL} alt="404 error gif" className="page-img" />
+      <div className="error-page-container">
+        <h1>Oh no 404!</h1>
+        <img src="src/assets/cat-computer.gif" alt="404 error gif" className="page-img" />
+      </div>
     </div>
   );
 }
