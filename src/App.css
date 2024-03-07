@@ -176,6 +176,7 @@ div.card-wrapper {
     padding: 1rem;
     outline: 1px solid #2c47b5;
     user-select: none;
+    cursor: grab;
 }
 
 div.button-container {
