@@ -7,7 +7,7 @@ const HomePage = () => {
     <div className="main-content-container">
         <Sidebar/>
         <div className="home-content-container">
-            <h1>Welcome to React Kanban</h1>
+            <h1>Welcome The Board!</h1>
 
           <div className="current-boards-wrapper">
             <h2>Current Boards:</h2>
