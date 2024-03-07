@@ -73,6 +73,10 @@ div.home-content-container {
     flex: 1;
 }
 
+.home-content-container {
+    font-size: 1.2rem;
+}
+
 div.current-boards-wrapper {
     width: 100%;
     min-width: 350px;
@@ -81,6 +85,10 @@ div.current-boards-wrapper {
     border-radius: 3px;
     border: 1px solid black;
     padding: 1rem;
+}
+
+.current-boards-wrapper h2 {
+    font-size: 1.2rem;
 }
 
 div.boards-card {
@@ -93,6 +101,10 @@ div.boards-card {
     outline: 1px solid black;
 }
 
+.boards-card h3 {
+    font-size: 1rem;
+}
+
 .board-card-link {
     margin-left: auto;
     text-decoration: none;
@@ -101,6 +113,7 @@ div.boards-card {
     color: whitesmoke;
     font-weight: bold;
     background-color: #2c47b5;
+    font-size: 1rem;
 }
 
 .board-card-link:hover {
