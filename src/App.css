@@ -25,11 +25,13 @@ header nav {
     width: 100%;
     min-height: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
+    padding-left: 1rem;
 }
 
 nav h1 {
+    font-size: 1.4rem;
     color: whitesmoke;
 }
 
@@ -261,6 +263,20 @@ footer.footer-container {
     gap: 1rem;
     color: white;
 }
+
+.footer-container p a {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: whitesmoke;
+}
+
+.footer-container p a:hover {
+    color: #ffd151;
+    transition: all 500ms;
+}
+
 
 /* Modal Forms */
 
