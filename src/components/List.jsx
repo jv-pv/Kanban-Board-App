@@ -116,6 +116,27 @@ const List = ({type, cards, setCards}) => {
     return data && data.status === type
   })
   
+  
+  const handleDragStart = (e, cardId) => {
+    e.dataTransfer.setData("text/plain", cardId)
+  }
+  
+  const handleDrop = (e, targetStatus) => {
+    e.preventDefault()
+    
+    const cardId = e.dataTransfer.getData("text/plain")
+    
+    setCards((prev) => prev.map((card) => card.id === cardId ? {...card, status: targetStatus}: card) )
+  }
+  
+  const handleOnDragOver = (e) => {
+    e.preventDefault()
+  }
+  
+  useEffect(() => {
+    console.log(cards)
+  }, [cards])
+  
   let cardComponents = filteredByType.map(data => {
     return (
       <Card
@@ -129,26 +150,6 @@ const List = ({type, cards, setCards}) => {
       />
       )
     })
-    
-  const handleDragStart = (e, cardId) => {
-    e.dataTransfer.setData("text/plain", cardId)
-  }
-
-  const handleDrop = (e, targetStatus) => {
-    e.preventDefault()
-   
-    const cardId = e.dataTransfer.getData("text/plain")
-   
-    setCards((prev) => prev.map((card) => card.id === cardId ? {...card, status: targetStatus}: card) )
-  }
-    
-  const handleOnDragOver = (e) => {
-    e.preventDefault()
-  }
-
-  useEffect(() => {
-    console.log(cards)
-  }, [cards])
 
   return (
     <div className="list-columns" onDrop={(e) => handleDrop(e, type)} onDragOver={(e)=> handleOnDragOver(e) }>
