@@ -115,34 +115,31 @@ const List = ({type, cards, setCards}) => {
   let filteredByType = cards.filter(data => {
     return data && data.status === type
   })
+  
+  let cardComponents = filteredByType.map(data => {
+    return (
+      <Card
+      key={data.id}
+      onDelete={handleDelete}
+      handleDragStart={handleDragStart}
+      handleTaskChange={handleTaskChange}
+      showToastMessage={showToastMessage}
+      
+      {...data}
+      />
+      )
+    })
+    
   const handleDragStart = (e, cardId) => {
-   
     e.dataTransfer.setData("text/plain", cardId)
   }
 
-  let cardComponents = filteredByType.map(data => {
-    return (
-        <Card
-        key={data.id}
-        onDelete={handleDelete}
-        handleDragStart={handleDragStart}
-        handleTaskChange={handleTaskChange}
-        showToastMessage={showToastMessage}
-       
-        {...data}
-        />
-    )
-  })
-
-
   const handleDrop = (e, targetStatus) => {
     e.preventDefault()
-    
    
-  const cardId = e.dataTransfer.getData("text/plain")
+    const cardId = e.dataTransfer.getData("text/plain")
    
     setCards((prev) => prev.map((card) => card.id === cardId ? {...card, status: targetStatus}: card) )
-   
   }
     
   const handleOnDragOver = (e) => {
@@ -150,7 +147,6 @@ const List = ({type, cards, setCards}) => {
   }
 
   useEffect(() => {
-
     console.log(cards)
   }, [cards])
 

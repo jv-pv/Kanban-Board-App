@@ -22,14 +22,10 @@ const Card = (props) => {
     }
   }
 
-  // console.log("This is the task", thisTask)
-
   const styles = {
     color: props.priority === "High" ? "crimson" : props.priority === "Medium" ? "darkorange" : props.priority === "Low" ? "green" : "",
     fontWeight: "bold"
   }
-  
-
 
   return (
     <div  draggable  onDragStart={(e) => props.handleDragStart(e, props.id)} className="card-wrapper">
